@@ -4,15 +4,17 @@
         <!-- Logo, etc. omitted for brevity -->
   
         <PopoverGroup class="hidden lg:flex lg:gap-x-12">
-          <!-- Loop all top-level menu items -->
+          <!-- Loop over mainMenu array -->
           <Popover
-            v-for="(menuItem, index) in menu.items"
+            v-for="(menuItem, index) in menu"
             :key="menuItem.title"
             class="relative"
           >
-            <!-- Check if this item is "Themen" -->
+            <!-- Special check if this item is "Themen" -->
             <template v-if="menuItem.title === 'Themen'">
-              <PopoverButton class="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
+              <PopoverButton
+                class="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900"
+              >
                 {{ menuItem.title }}
                 <ChevronDownIcon class="size-5 flex-none text-gray-400" aria-hidden="true" />
               </PopoverButton>
@@ -31,7 +33,9 @@
                 >
                   <div class="p-4">
                     <!-- If topics are still loading, show something -->
-                    <div v-if="topicsPending" class="text-gray-500">Loading Topics...</div>
+                    <div v-if="topicsPending" class="text-gray-500">
+                      Loading Topics...
+                    </div>
   
                     <div
                       v-else
@@ -51,16 +55,48 @@
               </transition>
             </template>
   
-            <!-- If it's not "Themen", use your existing logic -->
-            <template v-else>
-              <!-- If it has children -->
-              <PopoverButton v-if="menuItem.children?.length">
+            <!-- Otherwise, check if the menu item has children -->
+            <template v-else-if="menuItem.children?.length">
+              <PopoverButton
+                class="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900"
+              >
                 {{ menuItem.title }}
-                <!-- etc... -->
+                <ChevronDownIcon class="size-5 flex-none text-gray-400" aria-hidden="true" />
               </PopoverButton>
-              <!-- Or a simple link if no children -->
+  
+              <!-- Generic dropdown for the children -->
+              <transition
+                enter-active-class="transition ease-out duration-200"
+                enter-from-class="opacity-0 translate-y-1"
+                enter-to-class="opacity-100 translate-y-0"
+                leave-active-class="transition ease-in duration-150"
+                leave-from-class="opacity-100 translate-y-0"
+                leave-to-class="opacity-0 translate-y-1"
+              >
+                <PopoverPanel
+                  class="absolute z-10 mt-3 w-48 rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5"
+                >
+                  <div class="p-4">
+                    <div
+                      v-for="(child, childIndex) in menuItem.children"
+                      :key="child._key"
+                      class="hover:bg-gray-50 rounded-lg p-2"
+                    >
+                      <NuxtLink
+                        :to="`/${child.slug}`"
+                        class="block font-semibold text-gray-900"
+                      >
+                        {{ child.title }}
+                      </NuxtLink>
+                    </div>
+                  </div>
+                </PopoverPanel>
+              </transition>
+            </template>
+  
+            <!-- If no children, just render a link -->
+            <template v-else>
               <NuxtLink
-                v-else
                 :to="`/${menuItem.slug}`"
                 class="text-sm/6 font-semibold text-gray-900"
               >
@@ -80,25 +116,19 @@
   import { useTopics } from '~/composables/useTopics'
   import { RouterLink as NuxtLink } from 'vue-router'
   
-  // Props from your layout
   interface MenuItem {
     title: string
     slug?: string
-    children?: MenuItem[]
+    children?: MenuItem[] | null
+    _key?: string
   }
   
-  interface Menu {
-    title: string
-    items: MenuItem[]
-  }
-  
+  // Use defineProps to accept the new structure
   const props = defineProps<{
-    menu: Menu
+    menu: MenuItem[]
   }>()
   
-  // Grab the topics
+  // Grab topics (for the "Themen" item)
   const { data: topicsData, pending: topicsPending } = useTopics()
-  
-  // We'll store them in a computed
   const allTopics = computed(() => topicsData.value || [])
   </script>

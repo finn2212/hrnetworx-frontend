@@ -11,12 +11,18 @@ dependencies:
   '@heroicons/vue':
     specifier: ^2.2.0
     version: 2.2.0(vue@3.5.13)
+  '@portabletext/vue':
+    specifier: ^1.0.11
+    version: 1.0.11(vue@3.5.13)
   '@sanity/client':
     specifier: ^6.24.3
     version: 6.24.3
   '@sanity/image-url':
     specifier: ^1.1.0
     version: 1.1.0
+  add:
+    specifier: ^2.0.6
+    version: 2.0.6
   groq:
     specifier: ^3.69.0
     version: 3.69.0
@@ -1346,6 +1352,28 @@ packages:
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
     dev: false
 
+  /@portabletext/toolkit@2.0.16:
+    resolution: {integrity: sha512-aBvnD8MscoAlEIuZBn0Aksd+oCuoMGFOT3CtHIgRBaac0Vu4YnnMUF45xo/B/T5vmwWcnDXoJEJdn+SKDg1m+A==}
+    engines: {node: ^14.13.1 || >=16.0.0}
+    dependencies:
+      '@portabletext/types': 2.0.13
+    dev: false
+
+  /@portabletext/types@2.0.13:
+    resolution: {integrity: sha512-5xk5MSyQU9CrDho3Rsguj38jhijhD36Mk8S6mZo3huv6PM+t4M/5kJN2KFIxgvt4ONpvOEs1pVIZAV0cL0Vi+Q==}
+    engines: {node: ^14.13.1 || >=16.0.0 || >=18.0.0}
+    dev: false
+
+  /@portabletext/vue@1.0.11(vue@3.5.13):
+    resolution: {integrity: sha512-/KclMZwPOIinspuuTwidAJJ+shShNOJ2s9C8EKzfOVIIOHpyL9v0UC2TH0G8WSoSXxN7ob6DdRF6LrPyCm/QdQ==}
+    peerDependencies:
+      vue: ^3.3.4
+    dependencies:
+      '@portabletext/toolkit': 2.0.16
+      '@portabletext/types': 2.0.13
+      vue: 3.5.13(typescript@5.7.3)
+    dev: false
+
   /@redocly/ajv@8.11.2:
     resolution: {integrity: sha512-io1JpnwtIcvojV7QKDUSIuMN/ikdOUd1ReEnUnMKGfDVridQZ31J0MmIuqwuRjWDZfmvr+Q0MqCcfHM2gTivOg==}
     dependencies:
@@ -2016,6 +2044,10 @@ packages:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+
+  /add@2.0.6:
+    resolution: {integrity: sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==}
+    dev: false
 
   /agent-base@7.1.3:
     resolution: {integrity: sha512-jRR5wdylq8CkOe6hei19GGZnxM6rBGwFl3Bg0YItGDimvjGtAvdZk4Pu6Cl4u4Igsws4a1fd1Vq3ezrhn4KmFw==}

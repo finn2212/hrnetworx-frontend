@@ -1,8 +1,9 @@
 import { useAsyncData, useNuxtApp } from '#app'
 import groq from 'groq'
 
-const mainMenuQuery = groq`
-  *[_type == "menu" && title == "Main Menu"][0] {
+// GROQ query with a dynamic placeholder for the menu title
+const menuQuery = groq`
+  *[_type == "menu" && title == $title][0] {
     title,
     items[]{
       title,
@@ -15,15 +16,13 @@ const mainMenuQuery = groq`
   }
 `
 
-export function useMenu() {
+export function useMenu(menuTitle: string) {
   const { $sanityClient } = useNuxtApp()
 
-  const { data, pending, error } = useAsyncData('mainMenu', () =>
-    $sanityClient.fetch(mainMenuQuery)
+  const { data, pending, error } = useAsyncData(
+    `menu-${menuTitle}`, // Use a unique key per menu
+    () => $sanityClient.fetch(menuQuery, { title: menuTitle }) // Pass the dynamic title to the query
   )
-
-  console.log('Menu Data:', data.value)
-  console.log('Error:', error.value)
 
   return { data, pending, error }
 }

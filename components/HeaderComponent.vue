@@ -97,7 +97,7 @@
             <!-- If no children, just render a link -->
             <template v-else>
               <NuxtLink
-                :to="`/${menuItem.slug}`"
+                :to="menuItem.slug ? `/${menuItem.slug}` : '/'"
                 class="text-sm/6 font-semibold text-gray-900"
               >
                 {{ menuItem.title }}

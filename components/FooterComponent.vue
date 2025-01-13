@@ -6,14 +6,13 @@
         <div class="space-y-8">
           <img
             class="h-9"
-            src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+             :src="logo?.asset.url"
             alt="Company name"
           />
           <p class="text-balance text-sm/6 text-gray-600">
-            Making the world a better place through constructing elegant
-            hierarchies.
+            HRnetworx ist das führende Netzwerk für Personalentscheider und Personal-Dienstleister im deutschsprachigen Raum
           </p>
-          <div class="flex gap-x-6">
+          <!-- <div class="flex gap-x-6">
             <a
               v-for="item in navigation.social"
               :key="item.name"
@@ -23,7 +22,7 @@
               <span class="sr-only">{{ item.name }}</span>
               <component :is="item.icon" class="size-6" aria-hidden="true" />
             </a>
-          </div>
+          </div> -->
         </div>
 
         <!-- Example: Right side for Footer Menu items (passed as a prop) -->
@@ -69,10 +68,16 @@ interface MenuItem {
   children?: MenuItem[];
   _key?: string;
 }
+interface LogoType {
+  asset: any;
+  url?: string;
+  // ... add any additional fields from Sanity if needed
+}
 // Use defineProps to accept the new structure
 const props = defineProps<{
   menu: MenuItem[];
   copyRight: string;
+  logo: LogoType; // object with a .url for the logo
 }>();
 
 // For demonstration, your existing social icons

@@ -2,13 +2,16 @@
   <Suspense>
     <template #default>
       <div class="layout-wrapper">
-        <HeaderComponent :menu="siteConfig?.mainMenu ?? []" />
+        <HeaderComponent 
+        :menu="siteConfig?.mainMenu ?? []" 
+        :logo="siteConfig?.logo ?? {}" />
 
         <NuxtPage />
 
         <FooterComponent
           :menu="siteConfig?.footerMenu ?? []"
           :copyRight="siteConfig?.copyrightFooter ?? ''"
+          :logo="siteConfig?.logo ?? {}" />
         />
       </div>
     </template>

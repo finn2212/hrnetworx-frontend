@@ -1,4 +1,6 @@
 <template>
+  <HeroComponent>
+  </HeroComponent>
     <main class="container mx-auto min-h-screen max-w-3xl p-8">
       <h1 class="text-4xl font-bold mb-8">Posts</h1>
       <ul class="flex flex-col gap-y-4">

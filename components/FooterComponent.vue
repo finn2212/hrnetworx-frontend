@@ -4,11 +4,11 @@
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <!-- Example: Company Logo & Social Media on the left -->
         <div class="space-y-8">
-          <img
+          <!-- <img
             class="h-9"
-             :src="logo?.asset.url"
+             :src="logo?.asset?.url"
             alt="Company name"
-          />
+          /> -->
           <p class="text-balance text-sm/6 text-gray-600">
             HRnetworx ist das führende Netzwerk für Personalentscheider und Personal-Dienstleister im deutschsprachigen Raum
           </p>

@@ -70,7 +70,7 @@ interface MenuItem {
 }
 interface LogoType {
   asset: any;
-  url?: string;
+  // url?: string;
   // ... add any additional fields from Sanity if needed
 }
 // Use defineProps to accept the new structure
